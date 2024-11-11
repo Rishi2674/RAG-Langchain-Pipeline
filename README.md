@@ -1,11 +1,31 @@
 # RAG LangChain Pipeline Project
 
-This project implements a Retrieval-Augmented Generation (RAG) pipeline using LangChain and a Hugging Face model as the large language model (LLM). RAG is a method of combining retrieval with generative models to improve the quality of responses to queries by leveraging relevant documents from a knowledge base. This project includes:
+Welcome to the **RAG Pipeline project**! This repository demonstrates the implementation of a Retrieval-Augmented Generation (RAG) model using LangChain and Hugging Face's Qwen language model. The goal of this project is to combine state-of-the-art retrieval-based techniques with language generation models to enhance the capability of answering questions with contextually relevant information.
 
-- **Embedding Generation** using Sentence-Transformers for encoding the text.
-- **Vector Store** based on FAISS (Facebook AI Similarity Search) for efficient similarity searching.
-- **Retrieval-Augmented Generation Chain** using LangChain and a text generation model from Hugging Face.
-- **Data and Responses Storage**: A `responses.pdf` file in the `data` directory showcases example outputs from the RAG pipeline.
+## Table of Contents
+- [Project Overview](#project-overview)
+- [How It Works](#how-it-works)
+- [Project Structure](#project-structure)
+- [Prerequisites](#prerequisites)
+- [How to Run the Project](#how-to-run-the-project)
+- [Sample Responses](#sample-responses)
+- [Notes on Usage](#notes-on-usage)
+- [Technologies Used](#technologies-used)
+- [Acknowledgments](#acknowledgments)
+
+## Project Overview
+
+The **RAG Pipeline** integrates retrieval-based models with **generation-based models** to generate more accurate and context-aware responses. It retrieves relevant information from a document store (using FAISS for efficient retrieval) and then uses the Qwen language model to generate answers based on the retrieved documents.
+In this project you will find a fully functional pipeline using:
+- **LangChain**: For easy integration of different components like retrievers and language models.
+- **FAISS**: For efficient vector search and document retrieval.
+- **HuggingFace's Qwen/Qwen2.5-1.5B-Instruct model**: A powerful generative language model used for answering questions based on the retrieved context.
+
+## How It Works
+ - **Text Chunking**: irst, the input text (such as documents or articles) is chunked into smaller pieces. This helps in efficiently processing large documents.
+ - **Embeddings & FAISS**: The chunks are converted into embeddings using a pre-trained embedding model (from Hugging Face's sentence transformers). These embeddings are then indexed using FAISS for fast retrieval of similar documents.
+ - **Retriever**: The RAG pipeline uses a retriever that queries the FAISS index to find the most relevant chunks based on a user query.
+ - **Question Answering**: Once the relevant text chunks are retrieved, the Qwen language model generates the final answer by processing both the query and the retrieved context.
 
 ## Project Structure
 
@@ -28,10 +48,32 @@ To get started, ensure you have the following installed:
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/YourUsername/RAG-Langchain-Pipeline.git
+   git clone https://github.com/Rishi2674/RAG-Langchain-Pipeline.git
    cd RAG-Langchain-Pipeline
    
 2. **Installing Dependencies**:
    ```bash
-   git clone https://github.com/YourUsername/RAG-Langchain-Pipeline.git
+   git clone https://github.com/Rishi2674/RAG-Langchain-Pipeline.git
    cd RAG-Langchain-Pipeline
+   
+3. **Prepare Text Data**: Organize your text data for retrieval by storing chunks of text in the pipeline. The data can be processed and split into chunks using the `chunk_text` function in `utils.py`.
+4. **Run the RAG Pipeline**: Execute the pipeline with:
+   ```bash
+   cd src
+   python main.py
+  You can modify `main.py` to enter specific queries to retrieve relevant text and generate responses.
+
+## Sample Responses
+A sample of the RAG pipeline's output can be found in the `data` directory under `responses.pdf`. This file includes example queries and the model’s responses, showcasing the effectiveness of the RAG approach.
+
+## Notes on Usage
+- Ensure that the necessary model files are downloaded and stored in the correct paths.
+- Configure the FAISS index and Hugging Face model as per your requirements in `rag_pipeline.py`.
+
+## Technologies Used
+- **LangChain**: For creating and managing the RAG pipeline.
+- **HuggingFace**: Utilized for both embeddings and text generation.
+- **FAISS**: High-performance similarity search library for vector-based retrieval.
+
+## Acknowledgments
+This project leverages the LangChain framework and models from HuggingFace for powerful and customizable retrieval-augmented generation. Special thanks to the open-source contributors of both libraries for making such tools available.
